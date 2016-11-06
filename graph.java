@@ -17,19 +17,15 @@ import java.util.ArrayList;
 public class graph 
 {
 	static ArrayList<Vertex> vertices = new ArrayList<Vertex>();
-	static int temp1;
-	static int temp2;
-	static int lines;
-	static int v_edges;
-	static int v_vertices;
-	static int[][] testArray;
+	static int temp1, temp2, lines, v_vertices, v_edges;
+	static int[][] useableArray;
 	static String fileName = "ran50.txt";
 	
 	public static void main(String[] args) 
 	{
 		// TODO Auto-generated method stub
 		fileName = args[0];
-		solve();
+		solveProblem();
 	}
 	
 	static void countLines()
@@ -46,27 +42,27 @@ public class graph
         }
 	}
 
-	static void solve()
+	static void solveProblem()
 	{
 		System.out.println("Maximum Independent Set using Hill-Climbing Search");
 		System.out.println("--------------------------------------------------");
 		countLines();
-		testArray = parseFile();
-		populateGraph(testArray);
-		ArrayList<Integer> solution = hillClimbingSearch();
+		useableArray = readFileInformation();
+		createGraph(useableArray);
+		ArrayList<Integer> solution = hillClimb();
 		System.out.print(solution);
 		System.out.println();
 		System.out.println("Size: " + solution.size());
 		System.out.println("--------------------------------------------------");
 	}
 	
-	 static void populateEdges(int v1, int v2)
+	 static void addEdges(int v1, int v2)
 	 {
 		vertices.get(v1).addEdge(vertices.get(v2));
 		vertices.get(v2).addEdge(vertices.get(v1));
 	}
 	
-	 static void populateGraph(int[][] n)
+	 static void createGraph(int[][] n)
 	 {
 		for(int i = 0; i < v_vertices; i++)
 		{
@@ -75,11 +71,11 @@ public class graph
 		
 		for(int i = 1; i < v_edges; i++)
 		{
-			populateEdges(n[i][0], n[i][1]);
+			addEdges(n[i][0], n[i][1]);
 		}
 	}
 	
-	 static boolean checkem(ArrayList<Integer> array)
+	 static boolean isIndependent(ArrayList<Integer> array)
 	 {
 		boolean output = false;
 		Vertex vert;
@@ -98,7 +94,7 @@ public class graph
 		return true;
 	}
 	
-	static ArrayList<Integer> hillClimbingSearch()
+	static ArrayList<Integer> hillClimb()
 	{
 		Vertex initialState;
 		int temp;
@@ -120,7 +116,7 @@ public class graph
 					continue;
 				}
 				holding.add(temp);
-				if(checkem(holding) != true)
+				if(isIndependent(holding) != true)
 				{
 					holding.remove(holding.size()-1);
 				}
@@ -134,7 +130,7 @@ public class graph
 		return output;
 	}
 	
-	 static int[][] parseFile()
+	 static int[][] readFileInformation()
 	 {
 		int[][] array = new int[lines][2]; 
 		int i = 0;
