@@ -1,3 +1,10 @@
+/***************************
+ * @author Edwin Young
+ * Artificial Intelligence
+ * Assignment 4 Question 3
+ * Fall 2016
+ **************************/
+
 
 import java.util.ArrayList;
 
