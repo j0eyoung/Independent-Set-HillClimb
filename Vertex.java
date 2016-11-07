@@ -22,18 +22,4 @@ public class Vertex
 	{
 		edges.add(v);
 	}
-	
-	void printEdges()
-	{
-		System.out.println("V " + id + ":\t");
-		for(int i = 0; i < edges.size(); i++)
-		{
-			System.out.println(edges.get(i).id);
-			if(i < edges.size()-1)
-			{
-				System.out.println(", ");
-			}
-		}
-		System.out.println();
-	}
 }
