@@ -41,13 +41,15 @@ public class graph
 		try
 		{
 			BufferedReader br = new BufferedReader(new FileReader(fileName));
-	        String line = br.readLine();
-		    String[] par;
-		    par = line.split("\t");
-		    v_vertices = Integer.parseInt(par[0]);
-	    	v_edges = Integer.parseInt(par[1]);
-			}catch(Exception e){}
+	        	String line = br.readLine();
+		    	String[] par;
+		    	par = line.split("\t");
+		    	v_vertices = Integer.parseInt(par[0]);
+	    		v_edges = Integer.parseInt(par[1]);
+		}
+		catch(Exception e){}
 	}
+	
 	static int[][] readFileInformation()
 	{
 		int[][] array = new int[v_edges][2]; 
@@ -55,20 +57,20 @@ public class graph
 		
 		try 
 		{
-	        BufferedReader br = new BufferedReader(new FileReader(fileName));
-	        String line = br.readLine();
-		    String[] par;
-	
-		    while((line = br.readLine()) != null)
-		    {
-		    	par = line.split("\t");
-		    	temp1 = Integer.parseInt(par[0]);
-		    	temp2 = Integer.parseInt(par[1]);
-		    	array[i][0]=temp1;
-		    	array[i][1]=temp2;
-		        i++;        
-		    }  
-		}catch (Exception ex) {}
+			BufferedReader br = new BufferedReader(new FileReader(fileName));
+			String line = br.readLine();
+			String[] par;
+			while((line = br.readLine()) != null)
+			{
+				par = line.split("\t");
+				temp1 = Integer.parseInt(par[0]);
+				temp2 = Integer.parseInt(par[1]);
+				array[i][0]=temp1;
+				array[i][1]=temp2;
+				i++;        
+			}  
+		}
+		catch (Exception ex) {}
 		return array;
 	} 
 	
@@ -118,6 +120,7 @@ public class graph
 					holding.remove(holding.size()-1);
 				}
 			}
+			
 			if(holding.size() > output.size())
 			{
 				output.clear();
